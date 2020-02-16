@@ -8,10 +8,7 @@ const INITIAL_STATE = {
 };
 
 export default function RouteReducer( state = INITIAL_STATE, action ) {
-  const currentRoute = localStorage.getItem( 'route' );
-
   switch (action.type) {
-
     case 'GO_TO':
       localStorage.setItem( 'route', action.route );
       return { ...state, route: action.route };

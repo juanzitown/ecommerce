@@ -10,7 +10,6 @@ import { LoginView, SignupView, RecoverView } from '../auth';
 
 export default function App() {
   const route = useSelector( state => state.routeReducer.route );
-  console.log( route );
 
   switch( route ) {
     case 'product': return <ProductListView />;
@@ -20,7 +19,6 @@ export default function App() {
     case 'login': return <LoginView />;
     case 'signup': return <SignupView />;
     case 'recover': return <RecoverView />;
+    default: return <LoginView />;
   }
-
-  return;
 }

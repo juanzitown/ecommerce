@@ -1,0 +1,1 @@
+export { default as LoginViewBackground } from './auth/login-view-background.png';

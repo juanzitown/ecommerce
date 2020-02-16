@@ -23,7 +23,7 @@ export default function ProductListView() {
     <div>
       <Navbar className="bp3-dark">
           <Navbar.Group align={Alignment.RIGHT}>
-              <Navbar.Heading>E-commerce</Navbar.Heading>
+              <Navbar.Heading>E-commerce <span onClick={ () => dispatch( redirect( 'login' ) ) }>(logout)</span></Navbar.Heading>
               <Navbar.Divider />
               <Button className="bp3-minimal" icon="shopping-cart" text={ 'Shopping cart' + counter } onClick={ () => dispatch( redirect( 'shopping-cart' ) ) } />
           </Navbar.Group>

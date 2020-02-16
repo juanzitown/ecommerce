@@ -25,7 +25,7 @@ export default function ProductListItem({ id, name, description, value, discount
         <Tag>{ discount || 0 }% off</Tag>
       </div>
       <p>{ description }</p>
-      <h5><a href="#">{ value }</a></h5>
+      <h5>{ value }</h5>
       
       { renderActionButton() }
     </Card>
