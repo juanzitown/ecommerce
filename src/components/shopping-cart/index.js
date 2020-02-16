@@ -1,0 +1,1 @@
+export { default as ShoppingCartListView } from './list/shopping-cart-list-view';

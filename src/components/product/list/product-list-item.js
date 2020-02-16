@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tag, Button, Card, Elevation } from "@blueprintjs/core";
 
-import { addProductToCartAction } from '../../../../store/product';
+import { addProductToCartAction } from '../../../store/product';
 
 export default function ProductListItem({ id, name, description, value, discount }) {
   const dispatch = useDispatch();
-  const cartproducts = useSelector( state => state.cartproducts );
-  const added = useSelector( state => state.cartproducts.find( product => product.id === id ), [cartproducts] ); 
+  const cartproducts = useSelector( state => state.productReducer.cartproducts );
+  const added = useSelector( state => state.productReducer.cartproducts.find( product => product.id === id ), [cartproducts] ); 
 
   const onAddToCard = ( event ) => {
     dispatch( addProductToCartAction( id ) );

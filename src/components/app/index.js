@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 //views
-import ProductHome from '../product/containers/ProductHome';
-import ShoppingCartHome from '../shopping-cart/ShoppingCartHome';
+import { ProductListView } from '../product';
+import { ShoppingCartListView } from '../shopping-cart';
 
 //auth views
 import { LoginView, SignupView, RecoverView } from '../auth';
@@ -13,8 +13,8 @@ export default function App() {
   console.log( route );
 
   switch( route ) {
-    case 'product': return <ProductHome />;
-    case 'shopping-cart': return <ShoppingCartHome />;
+    case 'product': return <ProductListView />;
+    case 'shopping-cart': return <ShoppingCartListView />;
 
     //auth views
     case 'login': return <LoginView />;

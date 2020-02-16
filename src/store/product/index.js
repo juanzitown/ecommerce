@@ -1,4 +1,3 @@
-
 //localStorage asserts
 const products = localStorage.getItem( 'products' );
 const cartproducts = localStorage.getItem( 'cartproducts' );
@@ -17,12 +16,6 @@ export default function ProductReducer(state = INITIAL_STATE, action) {
   const cartproducts = JSON.parse( localStorage.getItem( 'cartproducts' ) );
 
   switch (action.type) {
-    case 'GO_TO_PRODUCT_HOME':
-      return { ...state, route: 'product' };
-
-    case 'GO_TO_SHOPPING_CART_HOME':
-      return { ...state, route: 'shopping-cart' };
-
     case 'ADD_PRODUCT':
       products.push( { id: new Date().getTime(), ...action.product } );
       localStorage.setItem( 'products', JSON.stringify( products ) );
@@ -40,14 +33,6 @@ export default function ProductReducer(state = INITIAL_STATE, action) {
     default:
       return state;
   }
-};
-
-export const goToProductHomeAction = () => {
-  return { type: 'GO_TO_PRODUCT_HOME' };
-};
-
-export const goToShoppingCartHomeAction = () => {
-  return { type: 'GO_TO_SHOPPING_CART_HOME' };
 };
 
 export const addProductAction = ( product ) => {

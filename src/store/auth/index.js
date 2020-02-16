@@ -1,4 +1,3 @@
-
 //localStorage asserts
 const auths = localStorage.getItem( 'auths' );
 if( !auths ) localStorage.setItem( 'auths', JSON.stringify( [{ username: 'admin', passowrd: 'admin' }] ) );

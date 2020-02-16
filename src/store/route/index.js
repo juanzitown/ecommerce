@@ -1,4 +1,3 @@
-
 //localStorage asserts
 const route = localStorage.getItem( 'route' );
 if( !route ) localStorage.setItem( 'route', 'login' );
