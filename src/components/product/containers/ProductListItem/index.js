@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tag, Button, Card, Elevation } from "@blueprintjs/core";
 
-import { addProductToCartAction } from '../../../store/product';
+import { addProductToCartAction } from '../../../../store/product';
 
 export default function ProductListItem({ id, name, description, value, discount }) {
   const dispatch = useDispatch();

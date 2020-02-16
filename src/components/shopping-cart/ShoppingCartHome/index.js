@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Navbar, Alignment } from "@blueprintjs/core";
 
 import ShoppingCartList from '../ShoppingCartList';
-import { goToProductHomeAction } from '../../store/product';
+import { goToProductHomeAction } from '../../../store/product';
 
 
 

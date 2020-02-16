@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, Navbar, Alignment } from "@blueprintjs/core";
 
 import ProductList from '../ProductList';
-import { goToShoppingCartHomeAction } from '../../../store/product';
+import { goToShoppingCartHomeAction } from '../../../../store/product';
 
 export default function ProductHome() {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from "@blueprintjs/core";
 import ProductListItem from '../ProductListItem';
 
-import { addProductAction } from '../../../store/product';
+import { addProductAction } from '../../../../store/product';
 
 export default function ProductList() {
   const products = useSelector( state => state.products );
