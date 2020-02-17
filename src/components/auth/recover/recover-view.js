@@ -11,7 +11,7 @@ export default function RecoverView() {
     <div>
       <div>Recover View</div>
 
-      <Button text="Login" onClick={ () => dispatch( redirect( 'login' ) ) } />
+      <Button text="Signin" onClick={ () => dispatch( redirect( 'signin' ) ) } />
       <Button text="Signup" onClick={ () => dispatch( redirect( 'signup' ) ) } />
     </div>
   );

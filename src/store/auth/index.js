@@ -1,10 +1,11 @@
 //localStorage asserts
 const auths = localStorage.getItem( 'auths' );
-if( !auths ) localStorage.setItem( 'auths', JSON.stringify( [{ username: 'admin', passowrd: 'admin' }] ) );
+if( !auths ) localStorage.setItem( 'auths', JSON.stringify( [{ username: 'admin', password: 'admin' }] ) );
 
 //reducer
 const INITIAL_STATE = {
-  user: JSON.parse( localStorage.getItem( 'loggedUser' ) ),
+  error: '',
+  user: localStorage.getItem( 'loggedUser' ) ? JSON.parse( localStorage.getItem( 'loggedUser' ) ) : '',
 };
 
 export default function AuthReducer(state = INITIAL_STATE, action) {
@@ -14,11 +15,10 @@ export default function AuthReducer(state = INITIAL_STATE, action) {
     case 'SIGN_IN':
       var user = auths.find( auth => auth.username === action.user.username && auth.password === action.user.password );
       if( user ) localStorage.setItem( 'loggedUser', JSON.stringify({ username: user.username, password: user.password }) );
-      return { ...state, user: user };
+      return { ...state, user: user, error: !user ? 'Username or password is incorrect' : '' };
 
     case 'SIGN_UP':
       var user = action.user;
-      const auths = JSON.parse( localStorage.getItem( 'auths' ) );
       auths.push( user );
       localStorage.setItem( 'auths', JSON.stringify( auths ) );
       localStorage.setItem( 'loggedUser', JSON.stringify({ username: user.username, password: user.password }) );
@@ -33,11 +33,12 @@ export default function AuthReducer(state = INITIAL_STATE, action) {
   }
 };
 
-export const signInAction = ( user ) => {
+export const signInAction = ( username, password ) => {
+  const user = { username: username, password: password };
   return { type: 'SIGN_IN', user: user };
 };
 
-export const signOutAction = ( user ) => {
+export const signOutAction = () => {
   return { type: 'SIGN_OUT' };
 };
 

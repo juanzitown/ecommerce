@@ -1,1 +1,1 @@
-export { default as LoginViewBackground } from './auth/login-view-background.png';
+export { default as SigninViewBackground } from './auth/signin-view-background.png';

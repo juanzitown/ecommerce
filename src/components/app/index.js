@@ -6,7 +6,7 @@ import { ProductListView } from '../product';
 import { ShoppingCartListView } from '../shopping-cart';
 
 //auth views
-import { LoginView, SignupView, RecoverView } from '../auth';
+import { SigninView, SignupView, RecoverView } from '../auth';
 
 export default function App() {
   const route = useSelector( state => state.routeReducer.route );
@@ -16,9 +16,9 @@ export default function App() {
     case 'shopping-cart': return <ShoppingCartListView />;
 
     //auth views
-    case 'login': return <LoginView />;
+    case 'signin': return <SigninView />;
     case 'signup': return <SignupView />;
     case 'recover': return <RecoverView />;
-    default: return <LoginView />;
+    default: return <SigninView />;
   }
 }

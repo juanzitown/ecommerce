@@ -1,6 +1,6 @@
 //localStorage asserts
 const route = localStorage.getItem( 'route' );
-if( !route ) localStorage.setItem( 'route', 'login' );
+if( !route ) localStorage.setItem( 'route', 'signin' );
 
 //reducer
 const INITIAL_STATE = {
