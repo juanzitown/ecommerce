@@ -16,7 +16,7 @@ export default function ShoppingCartListView() {
         <Navbar.Group align={Alignment.RIGHT}>
           <Navbar.Heading>Shopping Cart</Navbar.Heading>
           <Navbar.Divider />
-          <Button className="bp3-minimal" icon="shopping-cart" text="Buy more" onClick={ () => dispatch( redirect( 'product' ) ) } />
+          <Button className="bp3-minimal" icon="shopping-cart" text="Buy more" onClick={ () => dispatch( redirect( 'product-list' ) ) } />
         </Navbar.Group>
       </Navbar>
 

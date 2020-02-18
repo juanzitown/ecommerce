@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Card, Button, Elevation, FormGroup, InputGroup } from "@blueprintjs/core";
 import { redirect } from '../../../store/route';
 import { signUpAction } from '../../../store/auth';
-import { SigninViewBackground } from '../../../assets/images';
+import { SigninViewBackground } from '../../../assets/image';
 
 const bgstyle = { display: 'flex', width: '100vw', height: '100vh', backgroundSize: 'contain', backgroundImage: `url(${ SigninViewBackground })` }
 
@@ -23,7 +23,7 @@ export default function SignupView() {
 
     if( !invalid && passwordMatch ) {
       dispatch( signUpAction( username, password ) );
-      dispatch( redirect( 'product' ) );
+      dispatch( redirect( 'product-list' ) );
     }
 
     setValidated( true );

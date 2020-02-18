@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 //views
-import { ProductListView } from '../product';
+import { ProductListView, ProductDetailView } from '../product';
 import { ShoppingCartListView } from '../shopping-cart';
 
 //auth views
@@ -12,7 +12,8 @@ export default function App() {
   const route = useSelector( state => state.routeReducer.route );
 
   switch( route ) {
-    case 'product': return <ProductListView />;
+    case 'product-list': return <ProductListView />;
+    case 'product-detail': return <ProductDetailView />;
     case 'shopping-cart': return <ShoppingCartListView />;
 
     //auth views

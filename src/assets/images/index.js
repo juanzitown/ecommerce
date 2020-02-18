@@ -1,1 +1,0 @@
-export { default as SigninViewBackground } from './auth/signin-view-background.png';
