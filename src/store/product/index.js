@@ -24,6 +24,10 @@ export default function ProductReducer(state = INITIAL_STATE, action) {
       localStorage.setItem( 'products', JSON.stringify( products ) );
       return { ...state, products: products };
 
+    case 'FILTER_PRODUCT':
+      var filter = action.filter || '';
+      return { ...state, products: products.filter( product => !filter || ( product.title.includes( filter ) || product.description.includes( filter ) ) ) };
+
     case 'ADD_PRODUCT_TO_CART':
       var added = cartproducts.find( product => product.id === action.id );
       if( !added ) {
@@ -44,6 +48,10 @@ export default function ProductReducer(state = INITIAL_STATE, action) {
 
 export const addProductAction = ( product ) => {
   return { type: 'ADD_PRODUCT', product: product };
+};
+
+export const filterProductAction = ( filter ) => {
+  return { type: 'FILTER_PRODUCT', filter: filter };
 };
 
 export const detailProductAction = ( id ) => {
