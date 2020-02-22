@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 
 //views
 import { ProductListView, ProductDetailView } from '../product';
-import { ShoppingCartListView } from '../shopping-cart';
+import { ShoppingCartListView, CheckoutDoneView } from '../shopping-cart';
 
 //auth views
-import { SigninView, SignupView, RecoverView } from '../auth';
+import { SigninView, SignupView } from '../auth';
 
 export default function App() {
   const route = useSelector( state => state.routeReducer.route );
@@ -15,11 +15,11 @@ export default function App() {
     case 'product-list': return <ProductListView />;
     case 'product-detail': return <ProductDetailView />;
     case 'shopping-cart': return <ShoppingCartListView />;
+    case 'checkout-done': return <CheckoutDoneView />;
 
     //auth views
     case 'signin': return <SigninView />;
     case 'signup': return <SignupView />;
-    case 'recover': return <RecoverView />;
     default: return <SigninView />;
   }
 }

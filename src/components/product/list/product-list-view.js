@@ -8,7 +8,7 @@ import { ProductListItem } from '../';
 //store
 import { redirect } from '../../../store/route';
 import { signOutAction } from '../../../store/auth';
-import { addProductAction, filterProductAction } from '../../../store/product';
+import { filterProductAction } from '../../../store/product';
 
 export default function ProductListView() {
   const dispatch = useDispatch();
@@ -24,10 +24,6 @@ export default function ProductListView() {
     dispatch( redirect( 'signin' ) )
   }
 
-  const onAddProduct = () => {
-    dispatch( addProductAction( { name: 'teste' } ) );
-  }
-
   const onFilterProduct = ( filter ) => {
     setFilter( filter );
     dispatch( filterProductAction( filter ) );
@@ -37,16 +33,19 @@ export default function ProductListView() {
     <div>
       <Navbar className="bp3-dark">
           <Navbar.Group align={Alignment.RIGHT}>
-            <InputGroup leftIcon="search" placeholder="Search products" type="search" value={ filter } onChange={ event => onFilterProduct( event.target.value ) } />
-            <Navbar.Heading>Hello, { loggedUser.username } <a onClick={ onSignOut }>(Sign out)</a></Navbar.Heading>
+            <Navbar.Heading>{ loggedUser.username } <a onClick={ onSignOut }>(Sign out)</a></Navbar.Heading>
             <Navbar.Divider />
             <Button className="bp3-minimal" icon="shopping-cart" text={ 'Shopping cart' + counter } onClick={ () => dispatch( redirect( 'shopping-cart' ) ) } />
           </Navbar.Group>
       </Navbar>
 
       <div>
-        <Button intent="success" text="Add product (debug)" onClick={ onAddProduct } />
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
+          <div style={{ lineHeight: '26px', fontSize: '16px', fontWeight: 'bold', marginRight: '16px' }}>{ 'Products (' + products.length + ')' }</div>
+          <div style={{ flex: '1' }}><InputGroup leftIcon="search" placeholder="Search products" type="search" value={ filter } onChange={ event => onFilterProduct( event.target.value ) } /></div>
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
           { products.map( product => <ProductListItem key={ product.id } { ...product } /> ) }
         </div>
       </div>

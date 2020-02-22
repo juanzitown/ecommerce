@@ -3,8 +3,10 @@ import { ProductsJson } from '../../assets/json';
 //localStorage asserts
 const products = localStorage.getItem( 'products' );
 const cartproducts = localStorage.getItem( 'cartproducts' );
+const history = localStorage.getItem( 'history' );
 if( !products ) localStorage.setItem( 'products', JSON.stringify( ProductsJson ) );
 if( !cartproducts ) localStorage.setItem( 'cartproducts', JSON.stringify( [] ) );
+if( !history ) localStorage.setItem( 'history', JSON.stringify( [] ) );
 
 //reducer
 const INITIAL_STATE = {
@@ -32,6 +34,7 @@ export default function ProductReducer(state = INITIAL_STATE, action) {
       var product = products.find( product => product.id === action.id );
       return { ...state, currentProduct: product };
 
+    //shopping cart
     case 'ADD_PRODUCT_TO_CART':
       var added = cartproducts.find( product => product.id === action.id );
       if( !added ) {
@@ -75,6 +78,14 @@ export default function ProductReducer(state = INITIAL_STATE, action) {
       localStorage.setItem( 'cartproducts', JSON.stringify( newCartproducts ) );
       return { ...state, cartproducts: newCartproducts };
 
+    case 'CHECKOUT_CART_PRODUCTS':
+      var loggedUser = JSON.parse( localStorage.getItem( 'loggedUser' ) );
+      var history = JSON.parse( localStorage.getItem( 'history' ) );
+      localStorage.setItem( 'cartproducts', JSON.stringify( [] ) );
+      history.push( { timestamp: new Date().getTime(), username: loggedUser.username, products: cartproducts } );
+      localStorage.setItem( 'history', JSON.stringify( history ) );
+      return { ...state, cartproducts: [] };
+
     default:
       return state;
   }
@@ -115,4 +126,9 @@ export const deleteCartProductAction = ( id ) => {
 
 export const deleteAllSelectedCartProductsAction = () => {
   return { type: 'DELETE_ALL_SELECTED_CART_PRODUCT' };
+};
+
+//checkout
+export const checkoutCartProductsAction = () => {
+  return { type: 'CHECKOUT_CART_PRODUCTS' };
 };

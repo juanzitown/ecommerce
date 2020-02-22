@@ -32,7 +32,7 @@ export default function SignupView() {
   return (
     <div style={ bgstyle }>
       <Card elevation={Elevation.ONE} style={{ width: '350px', margin: 'auto' }}>
-        <div>Create a new account</div>
+        <div style={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', marginBottom: '16px' }}>Create a new account</div>
 
         <form noValidate onSubmit={ handleSubmit }>
           <FormGroup labelFor="username-input" label="Username" labelInfo="(required)" intent="danger" helperText={ validated && !username ? 'This field is required' : ''  }>
@@ -47,12 +47,10 @@ export default function SignupView() {
             <InputGroup id="password-repeat-input" leftIcon="lock" placeholder="Repeat password" type="password" value={ repeatPassword } onChange={ event => setRepeatPassword( event.target.value ) } required />
           </FormGroup>
 
-          <Button type="submit" text="Create" />
+          <Button type="submit" text="Create" style={{ width: '100%', marginBottom: '24px' }} />
         </form>
 
-
-        <Button text="Signin" onClick={ () => dispatch( redirect( 'signin' ) ) } />
-        <Button text="Recover" onClick={ () => dispatch( redirect( 'recover' ) ) } />
+        <div style={{ display: 'flex', justifyContent: 'center' }}><a onClick={ () => dispatch( redirect( 'signin' ) ) }>I already have an account</a></div>
       </Card>
     </div>
   );

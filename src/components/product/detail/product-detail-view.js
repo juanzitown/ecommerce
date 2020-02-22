@@ -18,7 +18,6 @@ export default function ProductDetailView() {
   const added = useSelector( state => state.productReducer.cartproducts.find( p => p.id === product.id ), [cartproducts] ); 
 
   //attributes
-  const id = product.id;
   const title = product.title || '';
   const description = product.description || '';
   const price = product.price || '';
@@ -46,7 +45,7 @@ export default function ProductDetailView() {
       </Navbar>
 
       <div>
-        <img src={ SampleProductImage } style={ imgStyle } />
+        <img src={ SampleProductImage } alt="Product" style={ imgStyle } />
         <div style={{ minWidth: '320px', maxWidth: '480px', padding: '10px 16px', margin: '0 auto', borderTop: '1px solid #e0e0e0' }}>
           <div style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bold' }}>{ title }</div>
 

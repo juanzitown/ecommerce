@@ -5,7 +5,7 @@ import { Button, Navbar, Alignment, Checkbox } from "@blueprintjs/core";
 //store
 import { redirect } from '../../../store/route';
 import { ShoppingCartListItem } from '../';
-import { toggleAllCartProductsAction, deleteAllSelectedCartProductsAction } from '../../../store/product';
+import { toggleAllCartProductsAction, deleteAllSelectedCartProductsAction, checkoutCartProductsAction } from '../../../store/product';
 
 
 export default function ShoppingCartListView() {
@@ -24,6 +24,11 @@ export default function ShoppingCartListView() {
 
   const deleteAllSelected = () => {
     dispatch( deleteAllSelectedCartProductsAction() );
+  }
+
+  const onCheckout = () => {
+    dispatch( checkoutCartProductsAction() );
+    dispatch( redirect( 'checkout-done' ) );
   }
 
   return (
@@ -52,7 +57,7 @@ export default function ShoppingCartListView() {
             <div style={{ fontSize: '24px', fontWeight: 'bold' }}>${ total.toFixed( 2 ) }</div>
           </div>
 
-          <div><Button icon="shopping-cart" text="Checkout" /></div>
+          <div><Button icon="shopping-cart" text="Checkout" onClick={ onCheckout } /></div>
         </div>
       </div>
     </div>

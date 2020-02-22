@@ -34,7 +34,7 @@ export default function SigninView() {
   return (
     <div style={ bgstyle }>
       <Card elevation={Elevation.ONE} style={{ width: '350px', margin: 'auto' }}>
-        <div>Welcome to E-commerce</div>
+        <div style={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', marginBottom: '16px' }}>Welcome to E-commerce</div>
 
         { error ? <Callout intent="warning">{ error }</Callout> : null }
 
@@ -47,12 +47,10 @@ export default function SigninView() {
             <InputGroup id="password-input" leftIcon="lock" placeholder="Password" type="password" value={ password } onChange={ event => setPassword( event.target.value ) } required />
           </FormGroup>
 
-          <Button type="submit" text="Sign in" />
+          <Button type="submit" text="Sign in" style={{ width: '100%', marginBottom: '24px' }} />
         </form>
 
-
-        <Button text="Signup" onClick={ () => dispatch( redirect( 'signup' ) ) } />
-        <Button text="Recover" onClick={ () => dispatch( redirect( 'recover' ) ) } />
+        <div style={{ display: 'flex', justifyContent: 'center' }}><a onClick={ () => dispatch( redirect( 'signup' ) ) }>Create a new account</a></div>
       </Card>
     </div>
   );
