@@ -28,18 +28,52 @@ export default function ProductReducer(state = INITIAL_STATE, action) {
       var filter = action.filter || '';
       return { ...state, products: products.filter( product => !filter || ( product.title.includes( filter ) || product.description.includes( filter ) ) ) };
 
+    case 'DETAIL_PRODUCT':
+      var product = products.find( product => product.id === action.id );
+      return { ...state, currentProduct: product };
+
     case 'ADD_PRODUCT_TO_CART':
       var added = cartproducts.find( product => product.id === action.id );
       if( !added ) {
         var product = products.find( product => product.id === action.id );
-        if( product ) cartproducts.push( product );
+        if( product ) {
+          var cartproduct = { ...product, quantity: 1, selected: false };
+          cartproducts.push( cartproduct );
+          localStorage.setItem( 'cartproducts', JSON.stringify( cartproducts ) );
+        }
+      }
+      return { ...state, cartproducts: cartproducts };
+
+    case 'UPDATE_CART_PRODUCT':
+      var cartproduct = cartproducts.find( product => product.id === action.cartproduct.id );
+      if( cartproduct ) {
+        cartproduct.quantity = action.cartproduct.quantity || 1;
         localStorage.setItem( 'cartproducts', JSON.stringify( cartproducts ) );
       }
       return { ...state, cartproducts: cartproducts };
 
-    case 'DETAIL_PRODUCT':
-      var product = products.find( product => product.id === action.id );
-      return { ...state, currentProduct: product };
+    case 'TOGGLE_CART_PRODUCT':
+      var cartproduct = cartproducts.find( product => product.id === action.cartproduct.id );
+      if( cartproduct ) {
+        cartproduct.selected = !cartproduct.selected;
+        localStorage.setItem( 'cartproducts', JSON.stringify( cartproducts ) );
+      }
+      return { ...state, cartproducts: cartproducts };
+
+    case 'TOGGLE_ALL_CART_PRODUCTS':
+      cartproducts.map( product => product.selected = action.toggle );
+      localStorage.setItem( 'cartproducts', JSON.stringify( cartproducts ) );
+      return { ...state, cartproducts: cartproducts };
+
+    case 'DELETE_CART_PRODUCT':
+      var newCartproducts = cartproducts.filter( product => product.id !== action.id );
+      localStorage.setItem( 'cartproducts', JSON.stringify( newCartproducts ) );
+      return { ...state, cartproducts: newCartproducts };
+
+    case 'DELETE_ALL_SELECTED_CART_PRODUCT':
+      var newCartproducts = cartproducts.filter( product => !product.selected );
+      localStorage.setItem( 'cartproducts', JSON.stringify( newCartproducts ) );
+      return { ...state, cartproducts: newCartproducts };
 
     default:
       return state;
@@ -53,11 +87,32 @@ export const addProductAction = ( product ) => {
 export const filterProductAction = ( filter ) => {
   return { type: 'FILTER_PRODUCT', filter: filter };
 };
-
 export const detailProductAction = ( id ) => {
   return { type: 'DETAIL_PRODUCT', id: id };
 };
 
 export const addProductToCartAction = ( id ) => {
   return { type: 'ADD_PRODUCT_TO_CART', id: id };
+};
+
+//cart
+
+export const cartProductUpdateAction = ( id, quantity ) => {
+  return { type: 'UPDATE_CART_PRODUCT', cartproduct: { id: id, quantity: quantity } };
+};
+
+export const toggleAllCartProductsAction = ( toggle ) => {
+  return { type: 'TOGGLE_ALL_CART_PRODUCTS', toggle: toggle };
+};
+
+export const toggleCartProductAction = ( id ) => {
+  return { type: 'TOGGLE_CART_PRODUCT', cartproduct: { id: id } };
+};
+
+export const deleteCartProductAction = ( id ) => {
+  return { type: 'DELETE_CART_PRODUCT', id: id };
+};
+
+export const deleteAllSelectedCartProductsAction = () => {
+  return { type: 'DELETE_ALL_SELECTED_CART_PRODUCT' };
 };
