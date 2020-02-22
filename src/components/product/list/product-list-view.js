@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navbar, Alignment, Button, InputGroup } from "@blueprintjs/core";
+import { Navbar, Alignment, Button, InputGroup, NonIdealState } from "@blueprintjs/core";
 
 //views
 import { ProductListItem } from '../';
@@ -16,7 +16,6 @@ export default function ProductListView() {
   const products = useSelector( state => state.productReducer.products );
   const cartproducts = useSelector( state => state.productReducer.cartproducts );
   const counter = cartproducts.length ? '(' + cartproducts.length + ')' : '';
-
   const [filter, setFilter] = React.useState( '' );
 
   const onSignOut = () => {
@@ -47,6 +46,7 @@ export default function ProductListView() {
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
           { products.map( product => <ProductListItem key={ product.id } { ...product } /> ) }
+          { !products.length ? <NonIdealState icon="search" title="No search results" description={ [<div key={ 1 }>Your search didn't match any files.</div>, <div key={ 2 }>Try searching for something else.</div>] } /> : null }
         </div>
       </div>
     </div>
